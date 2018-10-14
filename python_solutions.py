@@ -88,3 +88,166 @@ def letters_and_digits_counter():
         elif c in string.digits:
             d_count +=1
     print('Letters: {} \nDigits: {}'.format(l_count,d_count))
+
+
+def upper_lower_case_counter():
+    import string
+    sentence = input('Enter a sentence \n')
+    l_count = 0
+    u_count = 0
+    for c in sentence:
+        if c in string.ascii_uppercase:
+            u_count +=1
+        elif c in string.ascii_lowercase:
+            l_count +=1
+    print('Upper Case: {} \nLower Case: {}'.format(u_count,l_count))
+
+
+def custom_a_formula():
+    a = int(input('Enter a number:\n'))
+    n1 = int("%s%s"% (a,a))
+    n2 = int("%s%s%s"% (a,a,a))
+    n3 = int("%s%s%s%s"% (a,a,a,a))
+
+    print(a+n1+n2+n3)
+
+
+def square_odd_index():
+    seq = input('Enter a comma seperated number sequence')
+    seq_split = map(int, seq.split(','))
+    seq_square = [i**2 for i in seq_split if i % 2 == 1]
+    print(*seq_square, sep=',')
+
+
+class InsufficientAmount(Exception):
+    def __str__(self):
+        return 'Balance is insufficient'
+
+class BankAccount():
+
+    def __init__(self):
+        self.balance = 0
+
+    def deposit(self, amount):
+        self.balance += amount
+
+    def withdraw(self, amount):
+        if amount > self.balance:
+            raise InsufficientAmount
+        else:
+            self.balance -= amount
+
+
+    @property
+    def bal(self):
+        return self.balance
+
+def bank_transactions():
+    account = BankAccount()
+    while True:
+        ip_seq = input('Enter D to deposit, or W for withdraw, or anything to cancel: \n')
+        if not ip_seq:
+            print(account.bal)
+            break
+        try:
+            action, amount = ip_seq.split(' ')
+            if action == 'D':
+                account.deposit(int(amount))
+            elif action == 'W':
+                account.withdraw(int(amount))
+        except ValueError:
+            print(account.bal)
+            break
+
+
+def password_validity():
+
+    def check_pass(password):
+        import re
+        lower_case_valid = bool(re.findall(r'[a-z]+',password))
+        upper_case_valid = bool(re.findall(r'[A-Z]+',password))
+        digits_valid = bool(re.findall(r'[0-9]+',password))
+        special_char_valid = bool(re.findall(r'[$#@]+',password))
+        len_valid = True if 6 <= len(password) <= 12 else False
+        return (lower_case_valid and upper_case_valid and digits_valid and special_char_valid and len_valid)
+
+    seq = input('Enter comma seperated passwords')
+    valid_pass = [password for password in seq.split(',') if check_pass(password)]
+    print(*valid_pass, sep=',')
+
+
+def name_age_height_sort():
+    ip_seq = []
+    while True:
+        try:
+            name, age, score = input('Enter name, age, score').split(',')
+            ip_seq.append((name, int(age), int(score)))
+        except:
+            import operator
+            print(sorted(ip_seq, key=operator.itemgetter(0,1,2)))
+            break
+
+
+def div_by_6_gen(n):
+    for i in range(1,n):
+        if i % 6 == 0:
+            yield i
+
+
+def word_freq():
+    import collections
+    sentence = input('Enter a sentence')
+    sentence_count = collections.Counter(sentence.split(' '))
+    for k,v in sorted(sentence_count.items()):
+        print('{}:{}'.format(k,v))
+
+
+def even_no_gen(n):
+    for i in range(n+1):
+        if i % 2 == 0:
+            yield i
+
+def even_no_gen_helper():
+    n = int(input('Enter n'))
+    gen = even_no_gen(n)
+    ans = []
+    while True:
+        try:
+            ans.append(next(gen))
+        except StopIteration:
+            print(*ans, sep=',')
+            break
+
+
+def even_nos_assertion(nos):
+    for no in nos:
+        assert(no%2==0) , 'Only even no allowed'
+
+
+def basic_expressions():
+    exp = input('Enter basic mathematic expressions')
+    print(eval(exp))
+
+
+def list_shuffle(nos):
+    import random
+    random.shuffle(nos)
+    print(nos)
+
+
+def sentences_combination():
+    subject = ["I", "You"]
+    verb = ["Play", "Love"]
+    object = ["Hockey","Football"]
+
+    sentences = [' '.join([s,v,o]) for s in subject
+                 for v in verb
+                 for o in object]
+
+    print(sentences)
+
+
+def remove_index_list_comp():
+    nos = [12,24,35,70,88,120,155]
+    ans = [num for num in nos if not nos.index(num) in [0,2,4,6]]
+    print(ans)
