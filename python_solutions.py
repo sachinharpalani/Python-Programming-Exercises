@@ -362,19 +362,15 @@ def robot_move():
                 print('Wrong key try again')
                 continue
 
-
-def my_flatten(ip_dict, op={}, k_name=[]):
-    for k, v in sorted(ip_dict.items()):
+op={}
+def my_flatten(ip_dict, prefix=''):
+    for k, v in ip_dict.items():
+        name = '%s_%s' % (prefix, k) if prefix else k
         if type(v) == dict:
-            k_name.append(k)
-            my_flatten(v, op, k_name)
+            my_flatten(v, name)
         else:
-            if k_name:
-                name='_'.join([*k_name, k])
-                op[name] = v
-            else:
-                op[k] = v
+            op[name] = v
+
     return op
 
-
-# print(my_flatten({'a':1, 'b': {'c': 4, 'd': [1,2], 'k': { 'l': 9}}}))
+# print(my_flatten({'a':1, 'b': {'c': 4, 'd': [1,2], 'k': { 'l': 9}},'e':1}))
