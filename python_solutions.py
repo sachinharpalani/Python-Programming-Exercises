@@ -251,7 +251,7 @@ def sentences_combination():
 
 def remove_index_list_comp():
     nos = [12,24,35,70,88,120,155]
-    ans = [num for num in nos if not nos.index(num) in [0,2,4,6]]
+    ans = [num for idx, num in enumerate(nos) if not idx in [0,2,4,6]]
     print(ans)
 
 
