@@ -73,9 +73,11 @@ def binary_divisible_by_5():
     ans = [bin(i).replace('0b','') for i in seq_int if i % 5 == 0]
     print(*ans, sep=',')
 
+
 def even_comma_sep():
     ans = [i for i in range(1000,3001) if i % 2 == 0]
     print(*ans,sep=',')
+
 
 def letters_and_digits_counter():
     import string
@@ -251,3 +253,102 @@ def remove_index_list_comp():
     nos = [12,24,35,70,88,120,155]
     ans = [num for num in nos if not nos.index(num) in [0,2,4,6]]
     print(ans)
+
+
+def matrix_3d(i=3,j=5,k=8):
+    print([[[0 for _ in range(k)] for _ in range(j)] for _ in range(i)])
+
+
+def list_intersection(a,b):
+    print(list(set(a).intersection(set(b))))
+
+
+def character_occurences():
+    import collections
+    sentence = input('Enter a sentence')
+    sentence_count = collections.Counter(sentence)
+    for ch, cnt in sorted(sentence_count.items()):
+        print('{},{}'.format(ch,cnt))
+
+
+def sentence_reversed():
+    sentence = input('Enter a sentence')
+    sentence_reverse = [word[::-1] for word in sentence.split(' ')]
+    print(' '.join(sentence_reverse[::-1]))
+
+
+def list_permutations(nos):
+    import itertools
+    print(list(itertools.permutations(nos)))
+
+
+class Person():
+
+    def __init__(self, gender=None):
+        self.gender = gender
+
+    def getGender(self):
+        return self.gender
+
+class Male(Person):
+    def __init__(self):
+        super().__init__('Male')
+
+    def getGender(self):
+        return super().getGender()
+
+
+class Female(Person):
+    def __init__(self):
+        super().__init__('Female')
+
+    def getGender(self):
+        return super().getGender()
+
+
+def binary_search(key, nos):
+    nos_back = nos[:]
+    nos_back.sort()
+    index=-1
+
+    for _ in nos_back:
+        nos_back_len = len(nos_back)
+        middle = nos_back[nos_back_len//2]
+
+        if key == middle:
+            index=middle
+            print('{} found at index {}'.format(key, middle-1))
+            break
+
+        elif key < middle:
+            nos_back = nos_back[:nos_back_len//2]
+
+        else:
+            nos_back = nos_back[nos_back_len//2:]
+
+    if index == -1:
+        print(key, 'not found')
+
+
+def robot_move():
+    x, y = 0, 0
+    while True:
+        ip_seq = input('Enter direction with steps \n')
+        if not ip_seq:
+            import math
+            print(x,y)
+            print(math.floor(math.sqrt(x**2 + y**2)))
+            break
+        else:
+            direction, steps = ip_seq.split(' ')
+            if direction == 'UP':
+                x += int(steps)
+            elif direction == 'DOWN':
+                x -= int(steps)
+            elif direction == 'LEFT':
+                y -= int(steps)
+            elif direction == 'RIGHT':
+                y += int(steps)
+            else:
+                print('Wrong key try again')
+                continue
