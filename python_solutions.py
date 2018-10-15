@@ -69,13 +69,22 @@ def seq_unique_sorted():
 
 def binary_divisible_by_5():
     seq = input('Enter comma seperated sequence of binary digits: \n')
-    seq_int = map(lambda x: int(x,2),seq.split(','))
-    ans = [bin(i).replace('0b','') for i in seq_int if i % 5 == 0]
+    ans = [i for i in seq.split(',') if int(i,2) % 5 == 0]
     print(*ans, sep=',')
 
 
 def even_comma_sep():
-    ans = [i for i in range(1000,3001) if i % 2 == 0]
+    ans=[]
+    for i in range(1000,3001):
+        flag=True
+        for j in str(i):
+            if int(j) % 2 ==0:
+                continue
+            else:
+                flag=False
+                break
+        if flag:
+            ans.append(i)
     print(*ans,sep=',')
 
 
@@ -352,3 +361,20 @@ def robot_move():
             else:
                 print('Wrong key try again')
                 continue
+
+
+def my_flatten(ip_dict, op={}, k_name=[]):
+    for k, v in sorted(ip_dict.items()):
+        if type(v) == dict:
+            k_name.append(k)
+            my_flatten(v, op, k_name)
+        else:
+            if k_name:
+                name='_'.join([*k_name, k])
+                op[name] = v
+            else:
+                op[k] = v
+    return op
+
+
+# print(my_flatten({'a':1, 'b': {'c': 4, 'd': [1,2], 'k': { 'l': 9}}}))
