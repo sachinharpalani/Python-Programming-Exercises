@@ -1,6 +1,6 @@
 def divisible_by_7_and_not_5():
-    ans = [i for i in range(2000,3201) if i % 7 == 0 and i % 5 != 0]
-    print(*ans,sep=',')
+    ans = [i for i in range(2000, 3201) if i % 7 == 0 and i % 5 != 0]
+    print(*ans, sep=',')
 
 
 def calculate_factorial():
@@ -16,7 +16,7 @@ def calculate_factorial():
 
 def dict_square():
     n = int(input('Enter a number'))
-    print({i:i*i for i in range(1,n+1)})
+    print({i: i*i for i in range(1, n+1)})
 
 
 def list_and_tuple():
@@ -45,11 +45,11 @@ def seq_custom_formula():
 
     seq = input('Enter a sequence')
     ans = [compute(int(e)) for e in seq.split(',')]
-    print(*ans,sep=',')
+    print(*ans, sep=',')
 
 
 def matrix_2d():
-    x,y = input('Enter x and y').split(',')
+    x, y = input('Enter x and y').split(',')
     ans = [[i*j for j in range(int(y))] for i in range(int(x))]
     print(ans)
 
@@ -57,35 +57,35 @@ def matrix_2d():
 def seq_sort():
     seq = input('Enter comma seperated words')
     seq_split = seq.split(',')
-    print(sorted(seq_split,key=lambda x:x[0]))
+    print(sorted(seq_split, key=lambda x: x[0]))
 
 
 def seq_unique_sorted():
     seq = input('Enter comma seperated words')
     seq_split = seq.split(' ')
-    ans = ' '.join(sorted(set(seq_split),key=lambda x:x[0]))
+    ans = ' '.join(sorted(set(seq_split), key=lambda x: x[0]))
     print(ans)
 
 
 def binary_divisible_by_5():
     seq = input('Enter comma seperated sequence of binary digits: \n')
-    ans = [i for i in seq.split(',') if int(i,2) % 5 == 0]
+    ans = [i for i in seq.split(',') if int(i, 2) % 5 == 0]
     print(*ans, sep=',')
 
 
 def even_comma_sep():
-    ans=[]
-    for i in range(1000,3001):
-        flag=True
+    ans = []
+    for i in range(1000, 3001):
+        flag = True
         for j in str(i):
-            if int(j) % 2 ==0:
+            if int(j) % 2 == 0:
                 continue
             else:
-                flag=False
+                flag = False
                 break
         if flag:
             ans.append(i)
-    print(*ans,sep=',')
+    print(*ans, sep=',')
 
 
 def letters_and_digits_counter():
@@ -95,10 +95,10 @@ def letters_and_digits_counter():
     d_count = 0
     for c in sentence:
         if c in string.ascii_letters:
-            l_count +=1
+            l_count += 1
         elif c in string.digits:
-            d_count +=1
-    print('Letters: {} \nDigits: {}'.format(l_count,d_count))
+            d_count += 1
+    print('Letters: {} \nDigits: {}'.format(l_count, d_count))
 
 
 def upper_lower_case_counter():
@@ -108,17 +108,17 @@ def upper_lower_case_counter():
     u_count = 0
     for c in sentence:
         if c in string.ascii_uppercase:
-            u_count +=1
+            u_count += 1
         elif c in string.ascii_lowercase:
-            l_count +=1
-    print('Upper Case: {} \nLower Case: {}'.format(u_count,l_count))
+            l_count += 1
+    print('Upper Case: {} \nLower Case: {}'.format(u_count, l_count))
 
 
 def custom_a_formula():
     a = int(input('Enter a number:\n'))
-    n1 = int("%s%s"% (a,a))
-    n2 = int("%s%s%s"% (a,a,a))
-    n3 = int("%s%s%s%s"% (a,a,a,a))
+    n1 = int("%s%s" % (a, a))
+    n2 = int("%s%s%s" % (a, a, a))
+    n3 = int("%s%s%s%s" % (a, a, a, a))
 
     print(a+n1+n2+n3)
 
@@ -134,6 +134,7 @@ class InsufficientAmount(Exception):
     def __str__(self):
         return 'Balance is insufficient'
 
+
 class BankAccount():
 
     def __init__(self):
@@ -148,15 +149,15 @@ class BankAccount():
         else:
             self.balance -= amount
 
-
     @property
     def bal(self):
         return self.balance
 
+
 def bank_transactions():
     account = BankAccount()
     while True:
-        ip_seq = input('Enter D to deposit, or W for withdraw, or anything to cancel: \n')
+        ip_seq = input('Enter D to deposit, or W for withdraw, or cancel: \n')
         if not ip_seq:
             print(account.bal)
             break
@@ -175,15 +176,17 @@ def password_validity():
 
     def check_pass(password):
         import re
-        lower_case_valid = bool(re.findall(r'[a-z]+',password))
-        upper_case_valid = bool(re.findall(r'[A-Z]+',password))
-        digits_valid = bool(re.findall(r'[0-9]+',password))
-        special_char_valid = bool(re.findall(r'[$#@]+',password))
+        lower_case_valid = bool(re.findall(r'[a-z]+', password))
+        upper_case_valid = bool(re.findall(r'[A-Z]+', password))
+        digits_valid = bool(re.findall(r'[0-9]+', password))
+        special_char_valid = bool(re.findall(r'[$#@]+', password))
         len_valid = True if 6 <= len(password) <= 12 else False
-        return (lower_case_valid and upper_case_valid and digits_valid and special_char_valid and len_valid)
+        return (lower_case_valid and upper_case_valid and
+                digits_valid and special_char_valid and len_valid)
 
     seq = input('Enter comma seperated passwords')
-    valid_pass = [password for password in seq.split(',') if check_pass(password)]
+    valid_pass = [password for password in seq.split(',')
+                  if check_pass(password)]
     print(*valid_pass, sep=',')
 
 
@@ -195,12 +198,12 @@ def name_age_height_sort():
             ip_seq.append((name, int(age), int(score)))
         except:
             import operator
-            print(sorted(ip_seq, key=operator.itemgetter(0,1,2)))
+            print(sorted(ip_seq, key=operator.itemgetter(0, 1, 2)))
             break
 
 
 def div_by_6_gen(n):
-    for i in range(1,n):
+    for i in range(1, n):
         if i % 6 == 0:
             yield i
 
@@ -209,14 +212,15 @@ def word_freq():
     import collections
     sentence = input('Enter a sentence')
     sentence_count = collections.Counter(sentence.split(' '))
-    for k,v in sorted(sentence_count.items()):
-        print('{}:{}'.format(k,v))
+    for k, v in sorted(sentence_count.items()):
+        print('{}:{}'.format(k, v))
 
 
 def even_no_gen(n):
     for i in range(n+1):
         if i % 2 == 0:
             yield i
+
 
 def even_no_gen_helper():
     n = int(input('Enter n'))
@@ -232,7 +236,7 @@ def even_no_gen_helper():
 
 def even_nos_assertion(nos):
     for no in nos:
-        assert(no%2==0) , 'Only even no allowed'
+        assert(no % 2 == 0), 'Only even no allowed'
 
 
 def basic_expressions():
@@ -249,9 +253,9 @@ def list_shuffle(nos):
 def sentences_combination():
     subject = ["I", "You"]
     verb = ["Play", "Love"]
-    object = ["Hockey","Football"]
+    object = ["Hockey", "Football"]
 
-    sentences = [' '.join([s,v,o]) for s in subject
+    sentences = [' '.join([s, v, o]) for s in subject
                  for v in verb
                  for o in object]
 
@@ -259,16 +263,16 @@ def sentences_combination():
 
 
 def remove_index_list_comp():
-    nos = [12,24,35,70,88,120,155]
-    ans = [num for idx, num in enumerate(nos) if not idx in [0,2,4,6]]
+    nos = [12, 24, 35, 70, 88, 120, 155]
+    ans = [num for idx, num in enumerate(nos) if idx not in [0, 2, 4, 6]]
     print(ans)
 
 
-def matrix_3d(i=3,j=5,k=8):
+def matrix_3d(i=3, j=5, k=8):
     print([[[0 for _ in range(k)] for _ in range(j)] for _ in range(i)])
 
 
-def list_intersection(a,b):
+def list_intersection(a, b):
     print(list(set(a).intersection(set(b))))
 
 
@@ -277,7 +281,7 @@ def character_occurences():
     sentence = input('Enter a sentence')
     sentence_count = collections.Counter(sentence)
     for ch, cnt in sorted(sentence_count.items()):
-        print('{},{}'.format(ch,cnt))
+        print('{},{}'.format(ch, cnt))
 
 
 def sentence_reversed():
@@ -299,6 +303,7 @@ class Person():
     def getGender(self):
         return self.gender
 
+
 class Male(Person):
     def __init__(self):
         super().__init__('Male')
@@ -318,14 +323,14 @@ class Female(Person):
 def binary_search(key, nos):
     nos_back = nos[:]
     nos_back.sort()
-    index=-1
+    index = -1
 
     for _ in nos_back:
         nos_back_len = len(nos_back)
         middle = nos_back[nos_back_len//2]
 
         if key == middle:
-            index=middle
+            index = middle
             print('{} found at index {}'.format(key, middle-1))
             break
 
@@ -345,7 +350,7 @@ def robot_move():
         ip_seq = input('Enter direction with steps \n')
         if not ip_seq:
             import math
-            print(x,y)
+            print(x, y)
             print(math.floor(math.sqrt(x**2 + y**2)))
             break
         else:
@@ -362,11 +367,13 @@ def robot_move():
                 print('Wrong key try again')
                 continue
 
-op={}
+op = {}
+
+
 def my_flatten(ip_dict, prefix=''):
     for k, v in ip_dict.items():
         name = '%s_%s' % (prefix, k) if prefix else k
-        if type(v) == dict:
+        if isinstance(v, dict):
             my_flatten(v, name)
         else:
             op[name] = v
